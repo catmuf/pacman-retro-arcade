@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Pac-Man Retro Arcade</title>
+  <link rel="stylesheet" href="./src/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+</head>
+<body class="bg-black text-white select-none">
+  <div class="arcade-cabinet-container">
+    <!-- Top Arcade Header -->
+    <header class="arcade-header">
+      <div class="title-wrap">
+        <h1 class="arcade-title">PAC-MAN</h1>
+        <span class="arcade-badge">ARCADE 1980 CLASSIC</span>
+      </div>
+
+      <!-- Controls & Toggles Toolbar -->
+      <div class="toolbar">
+        <button id="btn-pause" class="arcade-btn" title="Pause / Resume (Space / P)">
+          <span id="pause-icon">⏸️</span>
+          <span id="pause-text">PAUSE</span>
+        </button>
+        <button id="btn-sound" class="arcade-btn" title="Toggle Audio (M)">
+          <span id="sound-icon">🔊</span>
+          <span id="sound-text">SOUND</span>
+        </button>
+        <button id="btn-crt" class="arcade-btn active" title="Toggle CRT Scanline Effect">
+          <span>📺</span>
+          <span>CRT</span>
+        </button>
+        <button id="btn-restart" class="arcade-btn" title="Restart Game (R)">
+          <span>🔄</span>
+          <span>RESET</span>
+        </button>
+        <button id="btn-help" class="arcade-btn" title="How to Play & Ghost Personalities">
+          <span>❓</span>
+          <span>HELP</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Arcade Screen Area -->
+    <main class="arcade-screen-wrapper">
+      <div class="arcade-bezel">
+        <canvas id="game-canvas"></canvas>
+      </div>
+    </main>
+
+    <!-- On-screen Virtual D-Pad for Touch & Mobile devices -->
+    <div class="virtual-controls">
+      <div class="d-pad">
+        <button class="d-btn d-up" id="btn-d-up" aria-label="Up">▲</button>
+        <div class="d-horizontal">
+          <button class="d-btn d-left" id="btn-d-left" aria-label="Left">◀</button>
+          <div class="d-center"></div>
+          <button class="d-btn d-right" id="btn-d-right" aria-label="Right">▶</button>
+        </div>
+        <button class="d-btn d-down" id="btn-d-down" aria-label="Down">▼</button>
+      </div>
+    </div>
+
+    <!-- Quick Keyboard Shortcuts Helper Footer -->
+    <footer class="arcade-footer">
+      <div class="controls-hint">
+        <span>🎮 Controls: <strong>Arrow Keys</strong> or <strong>W/A/S/D</strong></span>
+        <span class="sep">•</span>
+        <span><strong>Space</strong>: Pause</span>
+        <span class="sep">•</span>
+        <span><strong>M</strong>: Sound</span>
+        <span class="sep">•</span>
+        <span><strong>R</strong>: Restart</span>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Help & Rules Modal Dialog -->
+  <div id="help-modal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h2>HOW TO PLAY</h2>
+        <button id="btn-close-modal" class="close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <section class="help-section">
+          <h3>🎯 Objective</h3>
+          <p>Guide Pac-Man through the maze, eating all pellets and energizers while avoiding the four ghosts!</p>
+        </section>
+
+        <section class="help-section">
+          <h3>👻 Ghost Personalities</h3>
+          <div class="ghost-guide-grid">
+            <div class="ghost-card blinky-card">
+              <span class="ghost-badge blinky-color">BLINKY (Red)</span>
+              <p><strong>Shadow:</strong> Direct chaser. Targets Pac-Man's exact location. Accelerates as dots decrease (<em>Cruise Elroy</em>).</p>
+            </div>
+            <div class="ghost-card pinky-card">
+              <span class="ghost-badge pinky-color">PINKY (Pink)</span>
+              <p><strong>Speedy:</strong> The ambusher. Targets 4 spaces ahead of Pac-Man to cut off escape routes.</p>
+            </div>
+            <div class="ghost-card inky-card">
+              <span class="ghost-badge inky-color">INKY (Cyan)</span>
+              <p><strong>Bashful:</strong> Tactical flanker. Targets the symmetric reflection across Blinky and Pac-Man.</p>
+            </div>
+            <div class="ghost-card clyde-card">
+              <span class="ghost-badge clyde-color">CLYDE (Orange)</span>
+              <p><strong>Pokey:</strong> The coward. Chases Pac-Man when far away, but flees to his corner when getting too close.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="help-section">
+          <h3>🍒 Scoring</h3>
+          <ul class="scoring-list">
+            <li><strong>Pellet (Dot):</strong> 10 pts</li>
+            <li><strong>Energizer (Power Pellet):</strong> 50 pts (frightens ghosts)</li>
+            <li><strong>Frightened Ghosts:</strong> 200, 400, 800, 1600 pts (combo chain)</li>
+            <li><strong>Bonus Fruits:</strong> 100 to 5,000 pts (Cherry, Strawberry, Peach, Apple, Melon, Galaxian, Bell, Key)</li>
+            <li><strong>Extra Life:</strong> Awarded at 10,000 pts</li>
+          </ul>
+        </section>
+      </div>
+      <div class="modal-footer">
+        <button id="btn-modal-got-it" class="arcade-btn primary-btn">LET'S PLAY!</button>
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="./src/main.ts"></script>
+</body>
+</html>
